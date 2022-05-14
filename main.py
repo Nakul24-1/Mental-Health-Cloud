@@ -44,8 +44,9 @@ def main():
         # At first page load, this is None (at least until #4099 is fixed)
         st.markdown("Unable to get session websocket. Please refresh the page.")
         st.stop()
-    headers = session_info.ws.request
+    headers = query_params = st.experimental_get_query_params()
     st.write(headers)
+    
 
     
     st.title("Mental Health")
@@ -61,6 +62,8 @@ def main():
     
     
     session = requests.Session()
+    #test = fetch(session,"https://panacea-app.auth.us-east-1.amazoncognito.com/login?client_id=2b5dqcl0go20lksgia833dl182&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://share.streamlit.io/nakul24-1/mental-health-cloud/main/main.py")
+    #st.text(test)
     with st.form("my_form"):
         st.header("Questions")
         st.subheader("Q1) How have you been feeling lately?")
