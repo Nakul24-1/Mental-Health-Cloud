@@ -22,25 +22,6 @@ headers = {"Authorization": "Bearer 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"}
 ak_url = "https://7888th4wcl.execute-api.us-east-1.amazonaws.com/v1/predict"
 
 
-
-def get_headers():
-    # Hack to get the session object from Streamlit.
-
-    current_server = Server.get_current()
-    if hasattr(current_server, '_session_infos'):
-        # Streamlit < 0.56
-        session_infos = Server.get_current()._session_infos.values()
-    else:
-        session_infos = Server.get_current()._session_info_by_id.values()
-
-    # Multiple Session Objects?
-    for session_info in session_infos:
-        headers = session_info.ws.request.headers
-        st.write(headers)
-#    return headers
-
-
-
 def query(payload):
 	response = requests.post(API_URL, headers=headers, json=payload)
 	return response.json()
@@ -63,7 +44,7 @@ def main():
         # At first page load, this is None (at least until #4099 is fixed)
         st.markdown("Unable to get session websocket. Please refresh the page.")
         st.stop()
-    headers = session_info.ws.request.headers
+    headers = session_info.ws.response.headers
     st.write(headers)
 
     
@@ -105,7 +86,9 @@ def main():
         #st.bar_chart(pd.DataFrame.from_records(out[0]))
         url = 'https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea'
         
-        myobj = {"messages": answers}
+        myobj = {
+"messages": answers
+}
 
         json_object = json.dumps(myobj, indent = 4)
         st.text(out)
