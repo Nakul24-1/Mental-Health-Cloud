@@ -109,12 +109,61 @@ def main():
                 max_key = maxPricedItem = max(out[0], key=lambda x:x['score'])
                 st.subheader(max_key['label'])
                 if max_key['label'] == 'anxiety':
+                    st.markdown("""<h2>Try these activities :</h2>
+                                        <ul>
+                                        <li>We would suggest to limit alcohol and caffeine, which can aggravate anxiety and trigger panic attacks.</li>
+                                        <li>Exercise daily to help you feel good and maintain your health</li>
+                                        <li>Take deep breaths. Inhale and exhale slowly.</li>
+                                        </ul>""")
+
+                    st.image("https://static.streamlit.io/examples/cat.jpg")
+                elif max_key['label'] == 'depression':
+                    #st.write("We would suggest you to try the following tasks :")
+                    st.markdown("""<h2>We would suggest you to try the following tasks :</h2>
+                                        <ul>
+                                        <li>Walking for thirty minutes</li>
+                                        <li>Socialize with Friends and Family</li>
+                                        <li>Eat a Healthy Diet</li>
+                                        </ul>
+                                        <h2>If you feel the need to talk to someone right now contact -</h2>
+                                        <ul>
+                                        <li>NYU Helpline</li>
+                                        <li>USA Suicide Prevention</li>
+                                        </ul>""")
+                    
+                elif max_key['label'] == 'anger':
+                    
+                    st.image("https://static.streamlit.io/examples/cat.jpg")
+                elif max_key['label'] == 'disgust':
+                    
+                    st.image("https://static.streamlit.io/examples/cat.jpg")
+                elif max_key['label'] == 'joy':
+                    
+                    st.image("https://static.streamlit.io/examples/cat.jpg")
+
+                elif max_key['label'] == 'surprise':
                     st.image("https://static.streamlit.io/examples/cat.jpg")
 
             with col2:
-                st.header("A dog")
-                st.image("https://static.streamlit.io/examples/dog.jpg")
-            
+                if max_key['label'] == 'anxiety':
+                    components.iframe(""" https://youtu.be/ybBxDWir8-8""" , scrolling = True , height = 350)
+
+                elif max_key['label'] == 'depression':
+                    
+                    components.iframe("""https://youtu.be/c_gqTkwiGys""" , scrolling = True , height = 350)
+                elif max_key['label'] == 'anger':
+                   
+                    
+                    st.image("https://static.streamlit.io/examples/cat.jpg")
+                elif max_key['label'] == 'disgust':
+                    
+                    st.image("https://static.streamlit.io/examples/dog.jpg")
+                elif max_key['label'] == 'joy':
+                    
+                    st.image("https://static.streamlit.io/examples/dog.jpg")
+
+                elif max_key['label'] == 'surprise':
+                    st.image("https://static.streamlit.io/examples/dog.jpg")
             
             
             
