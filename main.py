@@ -13,7 +13,7 @@ import json
 import altair as alt
 from streamlit.scriptrunner.script_run_context import get_script_run_ctx
 from streamlit.server.server import Server
-
+from streamlit_url_fragment import get_fragment
 
 
 API_URL = "https://api-inference.huggingface.co/models/Nakul24/RoBERTa-Goemotions-6"
@@ -44,7 +44,7 @@ def main():
         # At first page load, this is None (at least until #4099 is fixed)
         st.markdown("Unable to get session websocket. Please refresh the page.")
         st.stop()
-    headers = query_params = st.experimental_get_query_params()
+    headers = get_fragment()
     st.write(headers)
     
 
