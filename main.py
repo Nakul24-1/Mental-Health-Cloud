@@ -146,11 +146,11 @@ def main():
 
             with col2:
                 if max_key['label'] == 'anxiety':
-                    components.iframe(""" https://youtu.be/ybBxDWir8-8""" , scrolling = True , height = 350)
-
+                    components.iframe(""" https://youtu.be/embed/ybBxDWir8-8""" , scrolling = True , height = 315,frameborder=0,allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
+                
                 elif max_key['label'] == 'depression':
                     
-                    components.iframe("""https://youtu.be/c_gqTkwiGys""" , scrolling = True , height = 350)
+                    components.iframe("""https://youtu.be/embed/c_gqTkwiGys""" , scrolling = True , height = 350)
                 elif max_key['label'] == 'anger':
                    
                     
