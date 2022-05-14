@@ -109,17 +109,18 @@ def main():
                 max_key = maxPricedItem = max(out[0], key=lambda x:x['score'])
                 st.subheader(max_key['label'])
                 if max_key['label'] == 'anxiety':
-                    st.markdown("""<h2>Try these activities :</h2>
+
+                    st.markdown("""<h3>Try these activities :</h3>
                                         <ul>
                                         <li>We would suggest to limit alcohol and caffeine, which can aggravate anxiety and trigger panic attacks.</li>
                                         <li>Exercise daily to help you feel good and maintain your health</li>
                                         <li>Take deep breaths. Inhale and exhale slowly.</li>
-                                        </ul>""")
+                                        </ul>""",unsafe_allow_html=True)
 
                     st.image("https://static.streamlit.io/examples/cat.jpg")
                 elif max_key['label'] == 'depression':
                     #st.write("We would suggest you to try the following tasks :")
-                    st.markdown("""<h2>We would suggest you to try the following tasks :</h2>
+                    st.markdown("""<h3>We would suggest you to try the following tasks :</h3>
                                         <ul>
                                         <li>Walking for thirty minutes</li>
                                         <li>Socialize with Friends and Family</li>
@@ -129,43 +130,67 @@ def main():
                                         <ul>
                                         <li>NYU Helpline</li>
                                         <li>USA Suicide Prevention</li>
-                                        </ul>""")
+                                        </ul>""",unsafe_allow_html=True)
                     
                 elif max_key['label'] == 'anger':
-                    
-                    st.image("https://static.streamlit.io/examples/cat.jpg")
+                    st.markdown("""<h3>Try these activities :</h3>
+                                        <ul>
+                                        <li>Get some exercise as physical activity can help reduce stress that can cause you to become angry.</li>
+                                        <li>Try some deep breathing techniques or listening to music.</li>
+                                        <li>Exercise daily to help you feel calmer.</li>
+                                        <li>If you harmed someone, apologise. If you hurt yourself, apologise to yourself</li>
+                                        <li>Talk about how you are feeling. Parents or carers and other family members, such as grandparents, may be good listeners.</li>
+                                        </ul>""",unsafe_allow_html=True)
+                
                 elif max_key['label'] == 'disgust':
+                    st.markdown("""<h3>Feeling disgusted is a normal response, Here are a few ways to manage feelings of disgust:</h3>
+                                        <ul>
+                                        <li>Don't let your feelings control your thinking. </li>
+                                        <li>Rather than spending time imagining what other people are doing and thinking, become more mindful of your own wants, needs, and feelings.</li>
+                                        <li>Talk to someone you trust about your feelings.Parents and other family members, such as grandparents, may be good listeners. </li>
+                                        <li>Don't bad mouth the person you felt upset with.</li>
+                                        </ul>""",unsafe_allow_html=True)
                     
-                    st.image("https://static.streamlit.io/examples/cat.jpg")
+                   
                 elif max_key['label'] == 'joy':
+                    st.markdown("""<h3>It's great you're feeling joyful, here are a few things we suggest you to do :</h3>
+                                        <ul>
+                                        <li>Maintain your joy by focusing on keeping composure.</li>
+                                        <li>Use your positive mindframe to do something productive</li>
+                                        <li>Celebrate , throw a party, meet friends and/or family.</li>
+                                        <li>Spend Time in Nature, explore and enjoy the beauty of the world around you</li>
+                                        </ul>""",unsafe_allow_html=True)
                     
-                    st.image("https://static.streamlit.io/examples/cat.jpg")
 
                 elif max_key['label'] == 'surprise':
-                    st.image("https://static.streamlit.io/examples/cat.jpg")
+
+                    st.markdown("""<h3>You seem surprised, here is how you can cope up with suprise and unexpected events :</h3>
+                                        <ul>
+                                        <li>Acknowledge the fact, and learn to accept that surprises and unexpected events are part of life and are unavoidable.</li>
+                                        <li>In the future, when making a plan, always have an alternate plan, in case the first plans fail.</li>
+                                        <li>Celebrate , throw a party, meet friends and/or family.</li>
+                                        <li>Wait for a few moments, before blurting out when confronting unexpected or unpleasant turns of fate.</li>
+                                        <li>Think constructively where you are going from there. You need to think how to adjust to the new situation and either fix it, improve it, or make the most of it.</li>
+                                        </ul>""",unsafe_allow_html=True)
 
             with col2:
                 if max_key['label'] == 'anxiety':
                     st.video('https://youtu.be/embed/ybBxDWir8-8') 
-                    components.iframe(""" https://youtu.be/embed/ybBxDWir8-8""" , scrolling = True , height = 315,frameborder=0,allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture")
-                
+        
                 elif max_key['label'] == 'depression':
                     st.video('https://youtu.be/embed/c_gqTkwiGys') 
                     
-                    components.iframe("""https://youtu.be/embed/c_gqTkwiGys""" , scrolling = True , height = 350)
                 elif max_key['label'] == 'anger':
-                   
-                    
-                    st.image("https://static.streamlit.io/examples/cat.jpg")
+                    st.video('https://youtu.be/embed/mQ2FJBJBRc') 
+
                 elif max_key['label'] == 'disgust':
+                    st.video('https://youtu.be/embed/74Z6WrQiu5k') 
                     
-                    st.image("https://static.streamlit.io/examples/dog.jpg")
                 elif max_key['label'] == 'joy':
-                    
-                    st.image("https://static.streamlit.io/examples/dog.jpg")
+                    st.video('https://youtu.be/embed/KFtELA58wEE') 
 
                 elif max_key['label'] == 'surprise':
-                    st.image("https://static.streamlit.io/examples/dog.jpg")
+                    st.video('https://youtu.be/embed/va1XMhEFsb0') 
             
             
             
