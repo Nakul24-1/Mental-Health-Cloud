@@ -11,11 +11,34 @@ import streamlit.components.v1 as components
 import requests
 import json
 import altair as alt
+from streamlit.scriptrunner.script_run_context import get_script_run_ctx
+from streamlit.server.server import Server
+
+
 
 API_URL = "https://api-inference.huggingface.co/models/Nakul24/RoBERTa-Goemotions-6"
 headers = {"Authorization": "Bearer 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"}
 
 ak_url = "https://7888th4wcl.execute-api.us-east-1.amazonaws.com/v1/predict"
+
+
+
+def get_headers():
+    # Hack to get the session object from Streamlit.
+
+    current_server = Server.get_current()
+    if hasattr(current_server, '_session_infos'):
+        # Streamlit < 0.56
+        session_infos = Server.get_current()._session_infos.values()
+    else:
+        session_infos = Server.get_current()._session_info_by_id.values()
+
+    # Multiple Session Objects?
+    for session_info in session_infos:
+        headers = session_info.ws.request.headers
+        st.write(headers)
+#    return headers
+
 
 
 def query(payload):
@@ -31,6 +54,19 @@ def fetch(session, url):
 
 def main():  
     st.set_page_config(layout="wide",page_title="Mental Health")
+
+    # Get headers
+    session_id = get_script_run_ctx().session_id
+    server = Server.get_current()
+    session_info = server._get_session_info(session_id)
+    if session_info.ws is None:
+        # At first page load, this is None (at least until #4099 is fixed)
+        st.markdown("Unable to get session websocket. Please refresh the page.")
+        st.stop()
+    headers = session_info.ws.request.headers
+    st.write(headers)
+
+    
     st.title("Mental Health")
     st.text("AI to Predict mental status of a person")
     st.markdown(
@@ -61,27 +97,46 @@ def main():
 
     if submitted:
         st.write("Result")
-        answers = input_q1 + input_q2 + input_q3
+        answers = input_q1 + " " + input_q2 + " " + input_q3
         out = query({"inputs": answers,})
+        
         #st.text(pd.DataFrame.from_records(out[0]))
 
         #st.bar_chart(pd.DataFrame.from_records(out[0]))
+        url = 'https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea'
+        
+        myobj = {"messages": answers}
+
+        json_object = json.dumps(myobj, indent = 4)
+        st.text(out)
+        #x = requests.post(url, data = json_object)
+        #out = x.text
+        #st.text(x.text)
+        #st.text(x.status_code)
         c = alt.Chart(pd.DataFrame.from_records(out[0])).mark_bar().encode(
             y='label',
             x='score').properties(width=200,height=350)
         
         st.altair_chart(c,use_container_width=True)
         
-        url = 'https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea'
-        
-        myobj = {"messages": answers}
+        # ADD Video in columns , add suggestions/resources based on current mood
+        col1, col2 = st.columns(2)
 
-        json_object = json.dumps(myobj, indent = 4)
-        st.text(json_object)
-        x = requests.post(url, data = json_object)
+        with col1:
+            st.header("Your Current mood is")
+            max_key = maxPricedItem = max(out[0], key=lambda x:x['score'])
+            st.subheader(max_key['label'])
+            #if max_key['label'] == 'anxiety':
+                
+            #st.image("https://static.streamlit.io/examples/cat.jpg")
+
+        with col2:
+            st.header("A dog")
+            st.image("https://static.streamlit.io/examples/dog.jpg")
         
-        st.text(x.status_code)
-        st.text(x.text)
+        
+        
+        
         #data = fetch(session, f"https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea")
         #if data:
         #    st.text(data)
@@ -89,7 +144,7 @@ def main():
         #    st.error("Error")
 
         History = st.form_submit_button("View History") # Chart code in comment below
-        # ADD Video in columns , add suggestions/resources based on current mood
+        
 
         '''
             alt.Chart(source).mark_bar().encode(
