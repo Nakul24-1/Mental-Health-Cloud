@@ -35,112 +35,105 @@ def fetch(session, url):
 
 def main():  
     st.set_page_config(layout="wide",page_title="Mental Health")
-
-    # Get headers
-    session_id = get_script_run_ctx().session_id
-    server = Server.get_current()
-    session_info = server._get_session_info(session_id)
-    if session_info.ws is None:
-        # At first page load, this is None (at least until #4099 is fixed)
-        st.markdown("Unable to get session websocket. Please refresh the page.")
-        st.stop()
-    headers = get_fragment()
-    st.write(headers)
-    
-
     
     st.title("Mental Health")
     st.text("AI to Predict mental status of a person")
-    st.markdown(
-        """[more info here](https://github.com/annasajkh/PianoGPT)"""
-    )
-    components.html("""
-    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-    <div class="elfsight-app-4c045bce-f323-4061-899e-f47ed67adf87"></div>
-    """,height=650)
 
-    
-    
-    session = requests.Session()
-    #test = fetch(session,"https://panacea-app.auth.us-east-1.amazoncognito.com/login?client_id=2b5dqcl0go20lksgia833dl182&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://share.streamlit.io/nakul24-1/mental-health-cloud/main/main.py")
-    #st.text(test)
-    with st.form("my_form"):
-        st.header("Questions")
-        st.subheader("Q1) How have you been feeling lately?")
-        input_q1 = st.text_area("Type out all your feelings here")
-        st.markdown("***")
-        st.subheader("Q2) Why do you think you feel like this?")
-        input_q2 = st.text_area("Please describe what caused your feelings")
-        st.markdown("***")
-        st.subheader("Q3) Since when are you feeling like this?")
-        input_q3 = st.text_area("Please inform us about the timeframe of your current feeling")
-        submitted = st.form_submit_button("Submit")
-        
-        #input_text = re.sub("\s+", " ", st.text_input("Enter text"))
-        #index = st.number_input("ID", min_value=0, max_value=100, key="index")
-
-    if submitted:
-        st.write("Result")
-        answers = input_q1 + " " + input_q2 + " " + input_q3
-        out = query({"inputs": answers,})
-        
-        #st.text(pd.DataFrame.from_records(out[0]))
-
-        #st.bar_chart(pd.DataFrame.from_records(out[0]))
-        url = 'https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea'
-        
-        myobj = {
-"messages": answers
-}
-
-        json_object = json.dumps(myobj, indent = 4)
-        st.text(out)
-        #x = requests.post(url, data = json_object)
-        #out = x.text
-        #st.text(x.text)
-        #st.text(x.status_code)
-        c = alt.Chart(pd.DataFrame.from_records(out[0])).mark_bar().encode(
-            y='label',
-            x='score').properties(width=200,height=350)
-        
-        st.altair_chart(c,use_container_width=True)
-        
-        # ADD Video in columns , add suggestions/resources based on current mood
-        col1, col2 = st.columns(2)
-
-        with col1:
-            st.header("Your Current mood is")
-            max_key = maxPricedItem = max(out[0], key=lambda x:x['score'])
-            st.subheader(max_key['label'])
-            #if max_key['label'] == 'anxiety':
-                
-            #st.image("https://static.streamlit.io/examples/cat.jpg")
-
-        with col2:
-            st.header("A dog")
-            st.image("https://static.streamlit.io/examples/dog.jpg")
-        
-        
-        
-        
-        #data = fetch(session, f"https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea")
-        #if data:
-        #    st.text(data)
-        #else:
-        #    st.error("Error")
-
-        History = st.form_submit_button("View History") # Chart code in comment below
-        
-
-        '''
-            alt.Chart(source).mark_bar().encode(
-            x=alt.X('sum(yield)', stack="normalize"),
-            y='variety',
-            color='label'
-            )
+    headers = get_fragment()
+    if headers == "":
+        st.markdown(
+        """[Log In](https://panacea-app.auth.us-east-1.amazoncognito.com/login?client_id=2b5dqcl0go20lksgia833dl182&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://share.streamlit.io/nakul24-1/mental-health-cloud/main/main.py)"""
+        )
+        components.html("""
+        <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+        <div class="elfsight-app-4c045bce-f323-4061-899e-f47ed67adf87"></div>
+        """,height=650)
+    else:
+        header_list = headers.split("&")
+        token = header_list[1].split("=") 
+        st.write(token[1])
 
 
-        '''
+    if headers != "":
+
+
+        session = requests.Session()
+        #test = fetch(session,"https://panacea-app.auth.us-east-1.amazoncognito.com/login?client_id=2b5dqcl0go20lksgia833dl182&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://share.streamlit.io/nakul24-1/mental-health-cloud/main/main.py")
+        #st.text(test)
+        with st.form("my_form"):
+            st.header("Questions")
+            st.subheader("Q1) How have you been feeling lately?")
+            input_q1 = st.text_area("Type out all your feelings here")
+            st.markdown("***")
+            st.subheader("Q2) Why do you think you feel like this?")
+            input_q2 = st.text_area("Please describe what caused your feelings")
+            st.markdown("***")
+            st.subheader("Q3) Since when are you feeling like this?")
+            input_q3 = st.text_area("Please inform us about the timeframe of your current feeling")
+            submitted = st.form_submit_button("Submit")
+            
+            #input_text = re.sub("\s+", " ", st.text_input("Enter text"))
+            #index = st.number_input("ID", min_value=0, max_value=100, key="index")
+
+        if submitted:
+            st.write("Result")
+            answers = input_q1 + " " + input_q2 + " " + input_q3
+            out = query({"inputs": answers,})
+            
+            #st.text(pd.DataFrame.from_records(out[0]))
+
+            #st.bar_chart(pd.DataFrame.from_records(out[0]))
+            url = 'https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea'
+            
+            myobj = {
+            "messages": answers
+            }
+
+            json_object = json.dumps(myobj, indent = 4)
+            st.text(out)
+            #x = requests.post(url, data = json_object)
+            #out = x.text
+            #st.text(x.text)
+            #st.text(x.status_code)
+            c = alt.Chart(pd.DataFrame.from_records(out[0])).mark_bar().encode(
+                y='label',
+                x='score').properties(width=200,height=350)
+            
+            st.altair_chart(c,use_container_width=True)
+            
+            # ADD Video in columns , add suggestions/resources based on current mood
+            col1, col2 = st.columns(2)
+
+            with col1:
+                st.header("Your Current mood is")
+                max_key = maxPricedItem = max(out[0], key=lambda x:x['score'])
+                st.subheader(max_key['label'])
+                if max_key['label'] == 'anxiety':
+                    st.image("https://static.streamlit.io/examples/cat.jpg")
+
+            with col2:
+                st.header("A dog")
+                st.image("https://static.streamlit.io/examples/dog.jpg")
+            
+            
+            
+            
+            #data = fetch(session, f"https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea")
+            #if data:
+            #    st.text(data)
+            #else:
+            #    st.error("Error")
+
+            History = st.form_submit_button("View History") # Chart code in comment below
+            '''
+                alt.Chart(source).mark_bar().encode(
+                x=alt.X('sum(yield)', stack="normalize"),
+                y='variety',
+                color='label'
+                )
+
+
+            '''
 
     '''
     picture = st.camera_input("Take a picture")
@@ -150,6 +143,7 @@ def main():
     <script src="https://apps.elfsight.com/p/platform.js" defer></script>
     <div class="elfsight-app-b996a8bc-edc2-4dc8-9b70-e462d9601b13"></div>
     """)
+
 if __name__ == '__main__':
     main()
 
