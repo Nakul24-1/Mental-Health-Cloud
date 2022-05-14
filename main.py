@@ -44,7 +44,7 @@ def main():
         # At first page load, this is None (at least until #4099 is fixed)
         st.markdown("Unable to get session websocket. Please refresh the page.")
         st.stop()
-    headers = session_info.ws.response.headers
+    headers = session_info.ws.request
     st.write(headers)
 
     
