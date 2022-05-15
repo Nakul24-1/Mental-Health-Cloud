@@ -10,6 +10,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import requests
 import json
+import json5
 import altair as alt
 from streamlit.scriptrunner.script_run_context import get_script_run_ctx
 from streamlit.server.server import Server
@@ -200,17 +201,22 @@ def main():
 
             data = fetch(session, f"https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea",headers1)
             if data:
-                st.text(data)
+                #st.text(data)
                 df = pd.DataFrame.from_records(data)
-                st.text(df)
-                label_df = (df.iloc([2]))
-                st.text(label_df)
-                st.text(df.loc(["times"]))
-                ndf = pd.DataFrame.from_list(df.iloc([1]))
-                st.text(ndf)
-                alt.Chart(label_df).mark_bar().encode(
+                #st.text(df)
+                df1 = pd.DataFrame.from_records(json5.loads(df.loc['labels'][0][0]))
+                df1['Time'] = df.loc['times'][0][0]
+
+                for x in range(1,len(df.loc['times'][0])):
+                  df2 = pd.DataFrame.from_records(json5.loads(df.loc['labels'][0][x]))
+                  df2['Time'] = df.loc['times'][0][x]
+                  df1 = pd.concat([df1, df2])
+
+
+                
+                alt.Chart(df1).mark_bar().encode(
                 x=alt.X('sum(score)', stack="normalize"),
-                y='variety',
+                y='Time',
                 color='label'
                 )
             else:
