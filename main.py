@@ -41,9 +41,9 @@ def main():
     
     
    
-    image = Image.open('https://panacea.s3.amazonaws.com/Picture1.png')
+    #image = Image.open('https://panacea.s3.amazonaws.com/Picture1.png')
 
-    st.image(image, caption='AI to Predict mental status of a person')
+    st.image('https://panacea.s3.amazonaws.com/Picture1.png', caption='AI to Predict mental status of a person')
     
 
     #st.write("AI to Predict mental status of a person")
