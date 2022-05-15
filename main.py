@@ -227,7 +227,7 @@ def main():
                 x=alt.X('sum(score)', stack="normalize"),
                 y='Time',
                 color='label'
-                )
+                ).properties(height = 1000)
                 
                 st.altair_chart(c2,use_container_width=True)
             else:
@@ -249,16 +249,6 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-    #form = st.form(key="submit-form")
-
-    #temperature = form.number_input("Temperature (the higher the value the less repetitive it will be)", min_value=0.3, max_value=1.0, value=1.0, step=0.01)
-    #top_k = form.number_input("Top k (the number of highest probability to be consider)", min_value=3, max_value=50257, value=40, step=1)
-    #generate = form.form_submit_button("Generate")
-    '''
-    picture = st.camera_input("Take a picture")
-    if picture:
-     st.image(picture)'''
 
 
 
