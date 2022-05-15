@@ -77,7 +77,7 @@ def main():
             #index = st.number_input("ID", min_value=0, max_value=100, key="index")
 
         if submitted:
-            st.write("Result")
+            st.header("Result")
             answers = input_q1 + " " + input_q2 + " " + input_q3
             #out = query({"inputs": answers,})
             
@@ -96,14 +96,15 @@ def main():
             x = requests.post(url,headers = headers1, data = json_object)
             out =  json.loads(x.text)
 
-            st.text(out)
+            #st.text(out)
             #st.text(x.text)
-            st.text(x.status_code)
+            #st.text(x.status_code)
             c = alt.Chart(pd.DataFrame.from_records(out)).mark_bar().encode(
                 y='label',
                 x='score').properties(width=200,height=350)
             
             st.altair_chart(c,use_container_width=True)
+            st.markdown("***")
             
             # ADD Video in columns , add suggestions/resources based on current mood
             col1, col2 = st.columns(2)
@@ -198,7 +199,8 @@ def main():
             
             
             #if st.button("View History"):
-
+        
+        
             data = fetch(session, f"https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea",headers1)
             if data:
                 #st.text(data)
@@ -214,7 +216,9 @@ def main():
                   
                 df1['Time'] = pd.to_datetime(df1['Time'],unit='s')
                 df1['Time'] = df1['Time'].dt.strftime('%d-%m %H:%M')
-                st.write(df1)
+                st.markdown("***")
+                st.header("Mental Health History")
+                st.markdown("***")
 
 
                 
