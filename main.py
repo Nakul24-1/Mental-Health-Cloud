@@ -78,7 +78,7 @@ def main():
         if submitted:
             st.write("Result")
             answers = input_q1 + " " + input_q2 + " " + input_q3
-            out = query({"inputs": answers,})
+            #out = query({"inputs": answers,})
             
             #st.text(pd.DataFrame.from_records(out[0]))
 
@@ -88,13 +88,14 @@ def main():
             myobj = {
             "messages": answers
             }
+            headers1 = {"authToken" : token[1]}
 
             json_object = json.dumps(myobj, indent = 4)
             st.text(out)
-            #x = requests.post(url, data = json_object)
-            #out = x.text
-            #st.text(x.text)
-            #st.text(x.status_code)
+            x = requests.post(url,headers = headers1, data = json_object)
+            out = x.text
+            st.text(x.text)
+            st.text(x.status_code)
             c = alt.Chart(pd.DataFrame.from_records(out[0])).mark_bar().encode(
                 y='label',
                 x='score').properties(width=200,height=350)
@@ -117,7 +118,7 @@ def main():
                                         <li>Take deep breaths. Inhale and exhale slowly.</li>
                                         </ul>""",unsafe_allow_html=True)
 
-                    st.image("https://static.streamlit.io/examples/cat.jpg")
+                    
                 elif max_key['label'] == 'depression':
                     #st.write("We would suggest you to try the following tasks :")
                     st.markdown("""<h3>We would suggest you to try the following tasks :</h3>
