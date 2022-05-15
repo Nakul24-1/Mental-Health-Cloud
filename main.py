@@ -200,6 +200,7 @@ def main():
             data = fetch(session, f"https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea",headers1)
             if data:
                 st.text(data)
+                st.text(pd.DataFrame.from_records(data))
             else:
                 st.error("Error")
 
