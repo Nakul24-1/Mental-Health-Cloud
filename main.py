@@ -220,7 +220,7 @@ def main():
                 y='Time',
                 color='label'
                 )
-                st.altair_chart(c2,use_container_width=True)
+                st.altair_chart(c2,use_container_width=True,height = 700)
             else:
                 st.error("Error")
 
