@@ -220,7 +220,7 @@ def main():
                 x=alt.X('sum(score)', stack="normalize"),
                 y='Time',
                 color='label'
-                ).properties(height=500)
+                )
                 
                 st.altair_chart(c2,use_container_width=True)
             else:
