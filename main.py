@@ -59,7 +59,6 @@ def main():
 
     if headers != "":
         response = client.get_user(AccessToken= token[1])
-        st.markdown("***")
         hello = "Hi " + response["Username"]
         st.subheader(hello)
         
