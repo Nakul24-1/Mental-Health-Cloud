@@ -202,10 +202,12 @@ def main():
             if data:
                 st.text(data)
                 df = pd.DataFrame.from_records(data)
-                label_df = pd.DataFrame.from_records(df["labels"][0])
+                st.text(df)
+                label_df = pd.DataFrame.from_records(json.loads(df["labels"]))
                 st.text(label_df)
                 st.text(df["times"])
-
+                ndf = pd.DataFrame.from_list(df["times"])
+                st.text(ndf)
                 alt.Chart(label_df).mark_bar().encode(
                 x=alt.X('sum(score)', stack="normalize"),
                 y='variety',
