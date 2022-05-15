@@ -236,10 +236,7 @@ def main():
 
             '''
 
-    '''
-    picture = st.camera_input("Take a picture")
-    if picture:
-     st.image(picture)'''
+    
     components.html("""
     <script src="https://apps.elfsight.com/p/platform.js" defer></script>
     <div class="elfsight-app-b996a8bc-edc2-4dc8-9b70-e462d9601b13"></div>
@@ -253,6 +250,10 @@ if __name__ == '__main__':
     #temperature = form.number_input("Temperature (the higher the value the less repetitive it will be)", min_value=0.3, max_value=1.0, value=1.0, step=0.01)
     #top_k = form.number_input("Top k (the number of highest probability to be consider)", min_value=3, max_value=50257, value=40, step=1)
     #generate = form.form_submit_button("Generate")
+    '''
+    picture = st.camera_input("Take a picture")
+    if picture:
+     st.image(picture)'''
 
 
 
