@@ -214,11 +214,12 @@ def main():
 
 
                 
-                alt.Chart(df1).mark_bar().encode(
+                c2 = alt.Chart(df1).mark_bar().encode(
                 x=alt.X('sum(score)', stack="normalize"),
                 y='Time',
                 color='label'
                 )
+                st.altair_chart(c2,use_container_width=True)
             else:
                 st.error("Error")
 
