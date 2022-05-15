@@ -196,23 +196,23 @@ def main():
                     st.video('https://youtu.be/embed/va1XMhEFsb0') 
             
             
-            if st.button("View History"):
+            #if st.button("View History"):
 
-                data = fetch(session, f"https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea",headers1)
-                if data:
-                    st.text(data)
-                    df = pd.DataFrame.from_records(data)
-                    label_df = pd.DataFrame.from_records(df["labels"][0])
-                    st.text(label_df)
-                    st.text(df["times"])
+            data = fetch(session, f"https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea",headers1)
+            if data:
+                st.text(data)
+                df = pd.DataFrame.from_records(data)
+                label_df = pd.DataFrame.from_records(df["labels"][0])
+                st.text(label_df)
+                st.text(df["times"])
 
-                    alt.Chart(label_df).mark_bar().encode(
-                    x=alt.X('sum(score)', stack="normalize"),
-                    y='variety',
-                    color='label'
-                    )
-                else:
-                    st.error("Error")
+                alt.Chart(label_df).mark_bar().encode(
+                x=alt.X('sum(score)', stack="normalize"),
+                y='variety',
+                color='label'
+                )
+            else:
+                st.error("Error")
 
 
             #History = st.form_submit_button("View History") # Chart code in comment below
