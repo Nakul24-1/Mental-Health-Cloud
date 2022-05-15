@@ -76,8 +76,9 @@ def main():
             #input_text = re.sub("\s+", " ", st.text_input("Enter text"))
             #index = st.number_input("ID", min_value=0, max_value=100, key="index")
 
-        if submitted:
+        if submitted:   
             st.header("Result")
+            st.markdown("***")
             answers = input_q1 + " " + input_q2 + " " + input_q3
             #out = query({"inputs": answers,})
             
