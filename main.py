@@ -211,8 +211,10 @@ def main():
                   df2 = pd.DataFrame.from_records(json5.loads(df.loc['labels'][0][x]))
                   df2['Time'] = df.loc['times'][0][x]
                   df1 = pd.concat([df1, df2])
+                  
                 df1['Time'] = pd.to_datetime(df1['Time'],unit='s')
                 df1['Time'] = df1['Time'].dt.strftime('%d-%m')
+                st.write(df1)
 
 
                 
