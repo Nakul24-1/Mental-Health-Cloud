@@ -197,11 +197,11 @@ def main():
             
             
             
-            #data = fetch(session, f"https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea")
-            #if data:
-            #    st.text(data)
-            #else:
-            #    st.error("Error")
+            data = fetch(session, f"https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea")
+            if data:
+                st.text(data)
+            else:
+                st.error("Error")
 
             History = st.form_submit_button("View History") # Chart code in comment below
             '''
