@@ -213,7 +213,7 @@ def main():
                   df1 = pd.concat([df1, df2])
                   
                 df1['Time'] = pd.to_datetime(df1['Time'],unit='s')
-                df1['Time'] = df1['Time'].dt.strftime('%d-%m')
+                df1['Time'] = df1['Time'].dt.strftime('%d-%m %H:%M')
                 st.write(df1)
 
 
