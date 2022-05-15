@@ -26,9 +26,9 @@ def query(payload):
 	response = requests.post(API_URL, headers=headers, json=payload)
 	return response.json()
 
-def fetch(session, url):
+def fetch(session, url,headers1):
         try:
-            result = session.get(url)
+            result = session.get(url,headers=headers1)
             return result.json()
         except Exception:
             return {}
@@ -197,7 +197,7 @@ def main():
             
             
             
-            data = fetch(session, f"https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea")
+            data = fetch(session, f"https://7fhrcwqoqh.execute-api.us-east-1.amazonaws.com/FirstStage/panacea",headers1)
             if data:
                 st.text(data)
             else:
