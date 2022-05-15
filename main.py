@@ -93,8 +93,8 @@ def main():
             json_object = json.dumps(myobj, indent = 4)
             
             x = requests.post(url,headers = headers1, data = json_object)
-            out = list(x.text)
-            st.text(out)
+            out = x.text
+            st.text(out[0])
             #st.text(x.text)
             st.text(x.status_code)
             c = alt.Chart(pd.DataFrame.from_records(out)).mark_bar().encode(
