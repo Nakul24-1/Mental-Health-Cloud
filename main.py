@@ -108,7 +108,7 @@ def main():
 
             with col1:
                 st.header("Your Current mood is")
-                max_key = maxPricedItem = max(out[0], key=lambda x:x['score'])
+                max_key = maxPricedItem = max(out, key=lambda x:x['score'])
                 st.subheader(max_key['label'])
                 if max_key['label'] == 'anxiety':
 
