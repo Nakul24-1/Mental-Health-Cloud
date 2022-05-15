@@ -47,7 +47,7 @@ def main():
     headers = get_fragment()
     if headers == "" or headers == None:
         st.markdown(
-        """[Log In](https://ccprojectdomain.auth.us-east-1.amazoncognito.com/login?client_id=47mogrgfkjucdcol48qp7fsmi5&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://share.streamlit.io/nakul24-1/mental-health-cloud/main/main.py)"""
+        """[Log In](https://ccprojectdomain.auth.us-east-1.amazoncognito.com/login?client_id=47mogrgfkjucdcol48qp7fsmi5&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://ec2-3-89-99-74.compute-1.amazonaws.com:8501)"""
         )
         components.html("""
         <script src="https://apps.elfsight.com/p/platform.js" defer></script>
