@@ -93,7 +93,7 @@ def main():
             json_object = json.dumps(myobj, indent = 4)
             
             x = requests.post(url,headers = headers1, data = json_object)
-            out = x.text
+            out = [x.text]
             st.text(out)
             #st.text(x.text)
             st.text(x.status_code)
