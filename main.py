@@ -41,7 +41,7 @@ def main():
     st.text("AI to Predict mental status of a person")
 
     headers = get_fragment()
-    if headers == "":
+    if headers == "" or headers == None:
         st.markdown(
         """[Log In](https://ccprojectdomain.auth.us-east-1.amazoncognito.com/login?client_id=47mogrgfkjucdcol48qp7fsmi5&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://share.streamlit.io/nakul24-1/mental-health-cloud/main/main.py)"""
         )
@@ -52,7 +52,7 @@ def main():
     else:
         header_list = headers.split("&")
         token = header_list[1].split("=") 
-        st.write(token[1])
+        #st.write(token[1])
 
 
     if headers != "":
