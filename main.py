@@ -95,9 +95,9 @@ def main():
             x = requests.post(url,headers = headers1, data = json_object)
             out = x.text
             st.text(out)
-            st.text(x.text)
+            #st.text(x.text)
             st.text(x.status_code)
-            c = alt.Chart(pd.DataFrame.from_records(out[0])).mark_bar().encode(
+            c = alt.Chart(pd.DataFrame.from_records(out)).mark_bar().encode(
                 y='label',
                 x='score').properties(width=200,height=350)
             
