@@ -212,6 +212,7 @@ def main():
                   df2['Time'] = df.loc['times'][0][x]
                   df1 = pd.concat([df1, df2])
                 df1['Time'] = pd.to_datetime(df1['Time'],unit='s')
+                df1['Time'] = df1['Time'].dt.strftime('%d-%m')
 
 
                 
@@ -219,8 +220,9 @@ def main():
                 x=alt.X('sum(score)', stack="normalize"),
                 y='Time',
                 color='label'
-                )
-                st.altair_chart(c2,use_container_width=True,height = 700)
+                ).properties(height=500)
+                
+                st.altair_chart(c2,use_container_width=True)
             else:
                 st.error("Error")
 
