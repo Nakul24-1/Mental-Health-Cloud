@@ -15,7 +15,6 @@ import altair as alt
 from streamlit.scriptrunner.script_run_context import get_script_run_ctx
 from streamlit.server.server import Server
 from streamlit_url_fragment import get_fragment
-from PIL import Image
 import boto3
 client = boto3.client('cognito-idp','us-east-1')
 
@@ -38,12 +37,9 @@ def fetch(session, url,headers1):
 
 def main():  
     st.set_page_config(layout="wide",page_title="Mental Health")
-    
-    
-   
-    #image = Image.open('https://panacea.s3.amazonaws.com/Picture1.png')
 
-    st.image('https://panacea.s3.amazonaws.com/Picture1.png', caption='AI to Predict mental status of a person',width=100)
+    st.image('https://panacea.s3.amazonaws.com/Picture1.png',width=100)
+    st.write('AI to Predict mental status of a person')
     
 
     #st.write("AI to Predict mental status of a person")
