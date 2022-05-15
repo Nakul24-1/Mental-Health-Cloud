@@ -16,6 +16,8 @@ from streamlit.scriptrunner.script_run_context import get_script_run_ctx
 from streamlit.server.server import Server
 from streamlit_url_fragment import get_fragment
 
+import boto3
+client = boto3.client('cognito-idp','us-east-1')
 
 API_URL = "https://api-inference.huggingface.co/models/Nakul24/RoBERTa-Goemotions-6"
 headers = {"Authorization": "Bearer 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"}
@@ -56,7 +58,11 @@ def main():
 
 
     if headers != "":
-
+        response = client.get_user(AccessToken= token[1])
+        st.markdown("***")
+        hello = "Hi " + response["Username"]
+        st.subheader(hello)
+        
 
         session = requests.Session()
         #test = fetch(session,"https://panacea-app.auth.us-east-1.amazoncognito.com/login?client_id=2b5dqcl0go20lksgia833dl182&response_type=token&scope=aws.cognito.signin.user.admin+email+openid+phone+profile&redirect_uri=https://share.streamlit.io/nakul24-1/mental-health-cloud/main/main.py")
