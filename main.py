@@ -15,7 +15,7 @@ import altair as alt
 from streamlit.scriptrunner.script_run_context import get_script_run_ctx
 from streamlit.server.server import Server
 from streamlit_url_fragment import get_fragment
-
+from PIL import Image
 import boto3
 client = boto3.client('cognito-idp','us-east-1')
 
@@ -39,8 +39,14 @@ def fetch(session, url,headers1):
 def main():  
     st.set_page_config(layout="wide",page_title="Mental Health")
     
-    st.title("Mental Health")
-    st.text("AI to Predict mental status of a person")
+    
+   
+    image = Image.open('https://panacea.s3.amazonaws.com/Picture1.png')
+
+    st.image(image, caption='AI to Predict mental status of a person')
+    
+
+    #st.write("AI to Predict mental status of a person")
 
     headers = get_fragment()
     if headers == "" or headers == None:
@@ -56,8 +62,7 @@ def main():
         token = header_list[1].split("=") 
         #st.write(token[1])
 
-
-    if headers != "":
+    if headers != "" and headers != None:
         response = client.get_user(AccessToken= token[1])
         hello = "Hi " + response["Username"]
         st.subheader(hello)
@@ -232,7 +237,7 @@ def main():
                 x=alt.X('sum(score)', stack="normalize"),
                 y='Time',
                 color='label'
-                ).properties(height = 1000)
+                ).properties(height = 600)
                 
                 st.altair_chart(c2,use_container_width=True)
             else:
