@@ -203,7 +203,7 @@ def main():
                 st.text(data)
                 df = pd.DataFrame.from_records(data)
                 st.text(df)
-                label_df = pd.DataFrame.from_records(df.loc(["labels"])[0])
+                label_df = (df.loc(["labels"]))
                 st.text(label_df)
                 st.text(df["times"])
                 ndf = pd.DataFrame.from_list(df.loc(["times"]))
